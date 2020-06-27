@@ -21,8 +21,8 @@ def main():
 
     while True:
         print("####### Server is listening #######")
-        data, address = s.recvfrom(4096)
-        print("\n\n 2. Server received: ", data.decode('utf-8'), "\n\n")
+        data, address = s.recvfrom(65536)
+        print("\n\n 2. Server received: ", len(data.decode('utf-8'))+44, "\n\n")
 
 
 if __name__ == '__main__':
