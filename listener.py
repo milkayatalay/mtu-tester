@@ -7,8 +7,11 @@ def main():
     if len(sys.argv) == 3:
         ip = sys.argv[1]
         port = int(sys.argv[2])
+    elif sys.argv[1]=="--help":
+        print("\nA tool for testing MTU capabilities on networks.\n\nRun like : \n\nlistener.py <arg1:server ip:this system IP 192.168.1.6> <arg2:server port:4444 >")
+        exit(1)
     else:
-        print("Run like : python3 listener.py <arg1:server ip:this system IP 192.168.1.6> <arg2:server port:4444 >")
+        print(" \nRun like : \n\nlistener.py <arg1:server ip:this system IP 192.168.1.6> <arg2:server port:4444 >")
         exit(1)
 
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

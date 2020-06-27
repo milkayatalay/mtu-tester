@@ -13,7 +13,7 @@ def main(MESSAGE):
         ip = sys.argv[1]
         port = int(sys.argv[2])
         messagesize = 19167
-        print("\ncontinue with maximum message size\n")
+        print("\nContinue with maximum message size (19167 byte)\n")
     elif sys.argv[1]=="--help":
         print("\nA tool for testing MTU capabilities on networks.\n\nRun like : \n\nmtu-tester.py <arg1:server ip:192.168.1.6> <arg2:server port:4444 > <arg3: message size:4500>")
         exit(1)
@@ -21,16 +21,28 @@ def main(MESSAGE):
         print("Run like : \n\nmtu-tester.py <arg1:server ip:192.168.1.6> <arg2:server port:4444 > <arg3: message size:4500>")
         exit(1)
 
-    if messagesize!=19167:
-        MESSAGE=MESSAGE[0:(messagesize-44)]
 
 
-    print("UDP target IP: %s" % ip)
-    print("UDP target port: %s" % port)
-    print("Message size : %d" % messagesize)
-   
     sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM) 
-    sock.sendto(MESSAGE, (ip, port))
+    print("\"CTRL+c for exit \"")
+    
+
+    while 1:
+        x=input("\n Type \"change\" for changing message size or press \"ENTER\" for sending message:")
+        if x=="change":
+            messagesize=int(input("Enter new message size:"))
+            
+            if messagesize!=19167:
+                messageForSending=MESSAGE[0:(messagesize-44)]
+        else:
+            if messagesize!=19167:
+                messageForSending=MESSAGE[0:(messagesize-44)]
+
+        print("\nUDP target IP: %s" % ip)
+        print("UDP target port: %s" % port)
+        print("Message size : %d" % messagesize)
+
+        sock.sendto(messageForSending, (ip, port))
 
 
 
